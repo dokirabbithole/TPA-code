@@ -1,3 +1,1 @@
-Compile the code:
-
-javac -Xlint:unchecked -encoding gbk -Djava.ext.dirs=. TPAGenerator.java
+This repository contains the Java implementation of the temporal preferential attachment (TPA) model.
