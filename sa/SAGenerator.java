@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.io.File;
 import java.util.SplittableRandom;
 
 
@@ -311,7 +312,11 @@ public class SAGenerator {
 		int initAttract = 60; // Integer.parseInt(args[5]);
 		
 		SAGenerator saGen = new SAGenerator(numNodesFinal, dType, dExp, tType, tExp, fType, fExp, fMax, initAttract);
-		String edgeFile = "E:\\graph\\" + "sa-" + numNodesFinal + dType + "-" + saGen.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
+		String outputBase = "graph/";
+		File outputDir = new File(outputBase);
+		if(!outputDir.exists())
+			outputDir.mkdir();
+		String edgeFile = outputBase + "sa-" + numNodesFinal + "-" + dType + "-" + saGen.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
 		saGen.createGraph(edgeFile);
 	}
 

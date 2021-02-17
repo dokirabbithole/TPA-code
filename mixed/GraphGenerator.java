@@ -7,6 +7,9 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.SplittableRandom;
+import java.io.File;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 import roulettewheel.AliasMethod;
 
@@ -340,7 +343,11 @@ public class GraphGenerator {
 		System.out.println("saThreshold = " + saThreshold);
 		
 		GraphGenerator tpaUGraphGen = new GraphGenerator(numNodesFinal, dType, dExp, tType, tExp, fType, fExp, fMax, initAttract, saThreshold);
-		String edgeFile = "E:\\graph\\" + "mix-" + numNodesFinal + dType + "-" + tpaUGraphGen.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
+		String outputBase = "graph/";
+		File outputDir = new File(outputBase);
+		if(!outputDir.exists())
+			outputDir.mkdir();
+		String edgeFile = outputBase + "mix-" + numNodesFinal + "-" + dType + "-" + tpaUGraphGen.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
 		tpaUGraphGen.createGraph(edgeFile);
 		
 		for(int i = 0; i < tpaUGraphGen.tBucketList.size(); i++)

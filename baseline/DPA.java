@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.io.File;
 
 public class DPA {
 	int numOfNodesFinal;
@@ -83,7 +84,11 @@ public class DPA {
 		timeStamp = 0;
 	}
 	public void generateGraph() throws IOException{
-		String outputPath = "graph/" + "dpa-" + numOfNodesFinal + "-" + numOfEdgesPerNode + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + ".txt";
+		String outputBase = "graph/";
+		File outputDir = new File(outputBase);
+		if(!outputDir.exists())
+			outputDir.mkdir();
+		String outputPath = outputBase + "dpa-" + numOfNodesFinal + "-" + numOfEdgesPerNode + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + ".txt";
 		graphWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outputPath)));
 		// construct an initial graph
 		int initialGraphSize = 10;

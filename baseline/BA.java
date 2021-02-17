@@ -34,7 +34,11 @@ public class BA {
 		for(int i = 0; i < numOfNodesFinal; i++){
 			deg[i] = 0;
 		}
-		String outputPath = "graph/" + "ba-" + numOfNodesFinal + "-" + numOfEdgesPerNode + ".txt";
+		String outputBase = "graph/";
+		File outputDir = new File(outputBase);
+		if(!outputDir.exists())
+			outputDir.mkdir();
+		String outputPath = outputBase + "ba-" + numOfNodesFinal + "-" + numOfEdgesPerNode + ".txt";
 		graphWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outputPath)));
 		// construct an initial graph
 		int initialGraphSize = Math.max(10, numOfEdgesPerNode);

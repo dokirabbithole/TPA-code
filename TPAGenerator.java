@@ -5,10 +5,11 @@ import sa_nonlinear.*;
 import mixed.*;
 import mixed_nonlinear.*;
 import java.io.IOException;
+import java.io.File;
 
 public class TPAGenerator {
 	void usage(){
-		System.out.println("java TPAGenerator -model <BA/DPA/DPAVary/RW/SA/Mixed> <args>");
+		System.out.println("java -Djava.ext.dirs=. TPAGenerator -model <BA/DPA/DPAVary/RW/SA/Mixed> <args>");
 		System.out.println("----------------------------------------------------------------------------");
 		System.out.println("args of BA: <numOfNodesFinal> <numOfEdgesPerNode>");
 		System.out.println("----------------------------------------------------------------------------");
@@ -31,6 +32,10 @@ public class TPAGenerator {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		TPAGenerator tpaGenerator = new TPAGenerator();
+		String outputBase = "graph/";
+		File outputDir = new File(outputBase);
+		if(!outputDir.exists())
+			outputDir.mkdir();
 		//tpaGenerator.usage();
 		if(args[0].equals("-model")){
 			String model = args[1];
@@ -128,12 +133,12 @@ public class TPAGenerator {
 				
 				if(dType.equals("logarithmic")){
 					LogRWModel rwModel = new LogRWModel(numOfNodesFinal, dType, dExp, tType, tExp, fType, fExp, fMax, initAttract);
-					String edgeFile = "graph/" + "rw-log-" + numOfNodesFinal + dType + "-" + rwModel.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
+					String edgeFile = "graph/" + "rw-log-" + numOfNodesFinal + "-" + dType + "-" + rwModel.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
 					rwModel.createGraph(edgeFile);
 				}
 				else{
 					RouletteWheelModel rwModel = new RouletteWheelModel(numOfNodesFinal, dType, dExp, tType, tExp, fType, fExp, fMax, initAttract);
-					String edgeFile = "graph/" + "rw-" + numOfNodesFinal + dType + "-" + rwModel.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
+					String edgeFile = "graph/" + "rw-" + numOfNodesFinal + "-" + dType + "-" + rwModel.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
 					rwModel.createGraph(edgeFile);
 				}					
 				break;
@@ -167,13 +172,13 @@ public class TPAGenerator {
 				if(dExp == 1.0)
 				{
 					SAGenerator saGen = new SAGenerator(numOfNodesFinal, dType, dExp, tType, tExp, fType, fExp, fMax, initAttract);
-					String edgeFile = "graph/" + "sa-" + numOfNodesFinal + dType + "-" + saGen.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
+					String edgeFile = "graph/" + "sa-" + numOfNodesFinal + "-" + dType + "-" + saGen.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
 					saGen.createGraph(edgeFile);
 				}
 				else
 				{
 					SAGeneratorNonLinear saGenNonLinear = new SAGeneratorNonLinear(numOfNodesFinal, dType, dExp, tType, tExp, fType, fExp, fMax, initAttract);
-					String edgeFile = "graph/" + "sa-nl-" + numOfNodesFinal + dType + "-" + saGenNonLinear.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
+					String edgeFile = "graph/" + "sa-nl-" + numOfNodesFinal + "-" + dType + "-" + saGenNonLinear.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
 					saGenNonLinear.createGraph(edgeFile);
 				}
 				break;
@@ -209,12 +214,12 @@ public class TPAGenerator {
 				
 				if(dExp == 1.0){
 					GraphGenerator tpaUGraphGen = new GraphGenerator(numOfNodesFinal, dType, dExp, tType, tExp, fType, fExp, fMax, initAttract, saThreshold);
-					String edgeFile = "graph/" + "mix-" + numOfNodesFinal + dType + "-" + tpaUGraphGen.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
+					String edgeFile = "graph/" + "mix-" + numOfNodesFinal + "-" + dType + "-" + tpaUGraphGen.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
 					tpaUGraphGen.createGraph(edgeFile);
 				}
 				else{
 					GraphGenerator2 tpaUGraphGen2 = new GraphGenerator2(numOfNodesFinal, dType, dExp, tType, tExp, fType, fExp, fMax, initAttract, saThreshold);
-					String edgeFile = "graph/" + "mix-nl-" + numOfNodesFinal + dType + "-" + tpaUGraphGen2.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
+					String edgeFile = "graph/" + "mix-nl-" + numOfNodesFinal + "-" + dType + "-" + tpaUGraphGen2.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
 					tpaUGraphGen2.createGraph(edgeFile);
 				}
 				break;

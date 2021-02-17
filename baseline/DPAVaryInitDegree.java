@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.io.File;
 
 public class DPAVaryInitDegree {
 	int numOfNodesFinal;
@@ -114,7 +115,11 @@ public class DPAVaryInitDegree {
 		timeStamp = 0;
 	}
 	public void generateGraph() throws IOException{
-		String outputPath = "graph/" + "dpa-vary-" + numOfNodesFinal + "-" + initdType + "-" + initdExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + ".txt";
+		String outputBase = "graph/";
+		File outputDir = new File(outputBase);
+		if(!outputDir.exists())
+			outputDir.mkdir();
+		String outputPath = outputBase + "dpa-vary-" + numOfNodesFinal + "-" + initdType + "-" + initdExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + ".txt";
 		graphWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outputPath)));
 		// construct an initial graph
 		int initialGraphSize = 10;

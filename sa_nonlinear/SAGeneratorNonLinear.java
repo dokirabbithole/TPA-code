@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.SplittableRandom;
+import java.io.File;
 
 
 public class SAGeneratorNonLinear {
@@ -310,7 +311,11 @@ public class SAGeneratorNonLinear {
 		int initAttract = 1000; // Integer.parseInt(args[5]);
 		
 		SAGeneratorNonLinear saGenNonLinear = new SAGeneratorNonLinear(numNodesFinal, dType, dExp, tType, tExp, fType, fExp, fMax, initAttract);
-		String edgeFile = "E:\\graph\\" + "sa-nl-" + numNodesFinal + dType + "-" + saGenNonLinear.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
+		String outputBase = "graph/";
+		File outputDir = new File(outputBase);
+		if(!outputDir.exists())
+			outputDir.mkdir();
+		String edgeFile = outputBase + "sa-nl-" + numNodesFinal + "-" + dType + "-" + saGenNonLinear.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
 		saGenNonLinear.createGraph(edgeFile);
 	}
 

@@ -6,6 +6,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.io.File;
 
 public class LogRWModel {
 	// parameters
@@ -252,7 +253,11 @@ public class LogRWModel {
 		int initAttract = 1000; // Integer.parseInt(args[5]);
 				
 		LogRWModel rwModel = new LogRWModel(numNodesFinal, dType, dExp, tType, tExp, fType, fExp, fMax, initAttract);
-		String edgeFile = "E:\\graph\\" + "rw-log-" + numNodesFinal + dType + "-" + rwModel.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
+		String outputBase = "graph/";
+		File outputDir = new File(outputBase);
+		if(!outputDir.exists())
+			outputDir.mkdir();
+		String edgeFile = outputBase + "rw-log-" + numNodesFinal + "-" + dType + "-" + rwModel.dExp + "-" + tType + "-" + tExp + "-" + fType + "-" + fExp + "-" + initAttract + ".txt";
 		rwModel.createGraph(edgeFile);
 	}
 }
